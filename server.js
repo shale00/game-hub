@@ -15,24 +15,50 @@ app.use(express.json());
 // Enable CORS
 app.use(cors()); // Allow all origins
 
-// Proxy route to forward requests to the external API
-app.get("/api/data", async (req, res) => {
+const fetchDataFromApi = async (endpoint) => {
   try {
     // Retrieve the API key from environment variables
     const apiKey = process.env.RAWG_API_KEY;
 
     // Forward the request to the external API
-    const response = await axios.get("https://api.rawg.io/api/games", {
+    const response = await axios.get(`https://api.rawg.io/api/${endpoint}`, {
       params: {
         key: apiKey,
       },
     });
-
-    // Return the data received from the external API to the client
-    res.json(response.data);
+    return response.data;
   } catch (error) {
-    console.error("Error fetching data from external API:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error(
+      `Error fetching data from external API for ${endpoint}`,
+      error
+    );
+    throw new Error("Internal server error");
+  }
+};
+
+// Fetch Games Route
+app.get("/api/games", async (req, res) => {
+  try {
+    // Fetch games data
+    const gamesData = await fetchDataFromApi("games");
+
+    // Return the data received
+    res.json(gamesData);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Fetch Genres Route
+app.get("/api/genres", async (req, res) => {
+  try {
+    // Fetch genres data
+    const genresData = await fetchDataFromApi("genres");
+
+    // Return the data received
+    res.json(genresData);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
