@@ -44,6 +44,9 @@ const fetchDataFromApi = async (endpoint, params) => {
 // Fetch Games Route
 app.get("/api/games", async (req, res) => {
   try {
+    //TODO: Instead of destructuring the req.query object, can also just add the req.query to the fetch parameters after games.
+    // ex. ... = await fetchDataFromApi("games", req.query)
+
     const { genres } = req.query;
     // Fetch games data
     const gamesData = await fetchDataFromApi("games", { genres });
