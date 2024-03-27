@@ -15,16 +15,21 @@ app.use(express.json());
 // Enable CORS
 app.use(cors()); // Allow all origins
 
-const fetchDataFromApi = async (endpoint) => {
+const fetchDataFromApi = async (endpoint, params) => {
   try {
     // Retrieve the API key from environment variables
     const apiKey = process.env.RAWG_API_KEY;
 
+    const url = `https://api.rawg.io/api/${endpoint}`;
+
+    const queryParams = {
+      key: apiKey,
+      ...params,
+    };
+
     // Forward the request to the external API
-    const response = await axios.get(`https://api.rawg.io/api/${endpoint}`, {
-      params: {
-        key: apiKey,
-      },
+    const response = await axios.get(url, {
+      params: queryParams,
     });
     return response.data;
   } catch (error) {
@@ -39,8 +44,9 @@ const fetchDataFromApi = async (endpoint) => {
 // Fetch Games Route
 app.get("/api/games", async (req, res) => {
   try {
+    const { genres } = req.query;
     // Fetch games data
-    const gamesData = await fetchDataFromApi("games");
+    const gamesData = await fetchDataFromApi("games", { genres });
 
     // Return the data received
     res.json(gamesData);
