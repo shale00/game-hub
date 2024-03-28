@@ -71,6 +71,20 @@ app.get("/api/genres", async (req, res) => {
   }
 });
 
+// Fetch Platforms Route
+app.get("/api/platforms/lists/parents", async (req, res) => {
+  try {
+    // Fetch platforms data
+    const platformsData = await fetchDataFromApi("platforms/lists/parents");
+
+    // Return the data received
+    res.json(platformsData);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
