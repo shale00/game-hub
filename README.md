@@ -2,7 +2,7 @@
 
 ## Description
 
-This App is a partial clone of the video game database, RAWG, using Vite React and Chakra UI for styling. It uses node.js and express.js for a RESTful API to keep the rawg API key secure. The user can filter games by genre, sort the games by platform and order the games by a number of properties, as well as search for games using a search input.
+Game Hub is a partial clone of the video game database, RAWG, using Vite React and Chakra UI for styling. It uses node.js and express.js for a RESTful API to keep the rawg API key secure. The user can filter games by genre, sort the games by platform and order the games by a number of properties, as well as search for games using a search input.
 
 ## Table of Contents
 
