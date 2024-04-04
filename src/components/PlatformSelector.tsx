@@ -9,8 +9,8 @@ interface Props {
 
 const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
   //When getting data from the api, we need to pass the selectedPlatform in the usePlatforms function, but don't need it if we render them statically.
-  //Leaving it in there on purpose in case I want to switch back to calling the api.
-  const { data, error } = usePlatforms(selectedPlatform);
+
+  const { data, error } = usePlatforms();
 
   if (error) return null;
 
