@@ -1,5 +1,5 @@
-import express from 'express';
-import dotenv from 'dotenv';
+import express, { Request, Response } from "express";
+import dotenv from "dotenv";
 import axios from "axios";
 import cors from "cors";
 
@@ -41,88 +41,46 @@ const fetchDataFromApi = async (endpoint: string, params: any) => {
 };
 
 // Fetch Games Route
-app.get(
-  "/api/games",
-  async (
-    req: { query: any },
-    res: {
-      json: (arg0: any) => void;
-      status: (arg0: number) => {
-        (): any;
-        new (): any;
-        json: { (arg0: { error: any }): void; new (): any };
-      };
-    }
-  ) => {
-    try {
-      // Fetch games data
-      const gamesData = await fetchDataFromApi("games", req.query);
+app.get("/api/games", async (req: Request, res: Response) => {
+  try {
+    // Fetch games data
+    const gamesData = await fetchDataFromApi("games", req.query);
 
-      // Return the data received
-      res.json(gamesData);
-    } catch (error) {
-      if (error instanceof Error)
-        res.status(500).json({ error: error.message });
-    }
+    // Return the data received
+    res.json(gamesData);
+  } catch (error) {
+    if (error instanceof Error) res.status(500).json({ error: error.message });
   }
-);
+});
 
 // Fetch Genres Route
-app.get(
-  "/api/genres",
-  async (
-    req: { query: any },
-    res: {
-      json: (arg0: any) => void;
-      status: (arg0: number) => {
-        (): any;
-        new (): any;
-        json: { (arg0: { error: any }): void; new (): any };
-      };
-    }
-  ) => {
-    try {
-      // Fetch genres data
-      const genresData = await fetchDataFromApi("genres", req.query);
+app.get("/api/genres", async (req: Request, res: Response) => {
+  try {
+    // Fetch genres data
+    const genresData = await fetchDataFromApi("genres", req.query);
 
-      // Return the data received
-      res.json(genresData);
-    } catch (error) {
-      if (error instanceof Error)
-        res.status(500).json({ error: error.message });
-    }
+    // Return the data received
+    res.json(genresData);
+  } catch (error) {
+    if (error instanceof Error) res.status(500).json({ error: error.message });
   }
-);
+});
 
 // Fetch Platforms Route
-app.get(
-  "/api/platforms/lists/parents",
-  async (
-    req: { query: any },
-    res: {
-      json: (arg0: any) => void;
-      status: (arg0: number) => {
-        (): any;
-        new (): any;
-        json: { (arg0: { error: any }): void; new (): any };
-      };
-    }
-  ) => {
-    try {
-      // Fetch platforms data
-      const platformsData = await fetchDataFromApi(
-        "platforms/lists/parents",
-        req.query
-      );
+app.get("/api/platforms/lists/parents", async (req: Request, res: Response) => {
+  try {
+    // Fetch platforms data
+    const platformsData = await fetchDataFromApi(
+      "platforms/lists/parents",
+      req.query
+    );
 
-      // Return the data received
-      res.json(platformsData);
-    } catch (error) {
-      if (error instanceof Error)
-        res.status(500).json({ error: error.message });
-    }
+    // Return the data received
+    res.json(platformsData);
+  } catch (error) {
+    if (error instanceof Error) res.status(500).json({ error: error.message });
   }
-);
+});
 
 // Start the server
 app.listen(PORT, () => {
