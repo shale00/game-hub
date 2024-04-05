@@ -21,7 +21,7 @@ const useData = <T>(
 
       setLoading(true);
       axios
-        .get<FetchResponse<T>>(`https://game-hub-shale00s-projects.vercel.app/api${endpoint}`, {
+        .get<FetchResponse<T>>(`http://localhost:3001/api${endpoint}`, {
           signal: controller.signal,
           ...requestConfig,
         })
