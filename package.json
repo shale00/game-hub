@@ -9,7 +9,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "vercel-build": "echo hello",
-    "start": "node -r ts-node/register ./api/index.ts"
+    "start": "ts-node ./api/index.ts"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
