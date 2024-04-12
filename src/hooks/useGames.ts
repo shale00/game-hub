@@ -10,6 +10,8 @@ export interface Game {
   metacritic: number;
   ordering: string;
   rating_top: number;
+  page_size: number;
+  page: number;
 }
 
 const useGames = (gameQuery: GameQuery) =>
@@ -21,6 +23,8 @@ const useGames = (gameQuery: GameQuery) =>
         parent_platforms: gameQuery.platform?.id,
         ordering: gameQuery.sortOrder,
         search: gameQuery.searchText,
+        page_size: 10,
+        
       },
     },
     [gameQuery]

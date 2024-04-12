@@ -8,12 +8,15 @@ import { Genre } from "./hooks/useGenres";
 import { Platform } from "./hooks/usePlatforms";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
+import Pagination from "./components/Pagination";
 
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
   sortOrder: string;
   searchText: string;
+  page: number;
+  itemCount: number;
 }
 
 function App() {
@@ -59,6 +62,7 @@ function App() {
           </HStack>
         </Box>
         <GameGrid gameQuery={gameQuery} />
+        <Pagination page={1} currentPage={3} itemCount={25} />
       </GridItem>
     </Grid>
   );
