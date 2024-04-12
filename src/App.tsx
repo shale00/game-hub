@@ -9,6 +9,7 @@ import { Platform } from "./hooks/usePlatforms";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
 import Pagination from "./components/Pagination";
+import useGames from "./hooks/useGames";
 
 export interface GameQuery {
   genre: Genre | null;
@@ -16,11 +17,16 @@ export interface GameQuery {
   sortOrder: string;
   searchText: string;
   page: number;
-  itemCount: number;
 }
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+
+  const { count } = useGames(gameQuery);
+
+  const handlePageChange = (page: number) => {
+    setGameQuery({ ...gameQuery, page });
+  };
 
   return (
     <Grid
@@ -62,7 +68,11 @@ function App() {
           </HStack>
         </Box>
         <GameGrid gameQuery={gameQuery} />
-        <Pagination page={1} currentPage={3} itemCount={25} />
+        <Pagination
+          currentPage={gameQuery.page}
+          itemCount={count || 0}
+          onSelectedPage={handlePageChange}
+        />
       </GridItem>
     </Grid>
   );

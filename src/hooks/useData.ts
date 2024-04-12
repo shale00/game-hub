@@ -9,9 +9,10 @@ interface FetchResponse<T> {
 const useData = <T>(
   endpoint: string,
   requestConfig?: AxiosRequestConfig,
-  deps?: any[]
+  deps?: any[],
 ) => {
   const [data, setData] = useState<T[]>([]);
+  const [count, setCount] = useState<number>();
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
@@ -27,6 +28,7 @@ const useData = <T>(
         })
         .then((res) => {
           setData(res.data.results);
+          setCount(res.data.count);
           setLoading(false);
         })
         .catch((err) => {
@@ -40,7 +42,7 @@ const useData = <T>(
     deps ? [...deps] : []
   );
 
-  return { data, error, isLoading };
+  return { data, count, error, isLoading };
 };
 
 export default useData;
