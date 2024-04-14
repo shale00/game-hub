@@ -8,9 +8,13 @@ interface Props {
 }
 
 const NavBar = ({onSearch}: Props) => {
+
+  const refresh = () => {
+    window.location.reload();
+  }
   return (
     <HStack padding={"10px"}>
-      <Image src={logo} boxSize={"60px"} />
+      <Image src={logo} boxSize={"60px"} onClick={refresh} cursor='pointer' />
       <SearchInput onSearch={onSearch} />
       <ColorModeSwitch />
     </HStack>
