@@ -72,6 +72,7 @@ function App() {
           currentPage={gameQuery.page}
           itemCount={count || 0}
           onSelectedPage={handlePageChange}
+          gameQuery={gameQuery}
         />
       </GridItem>
     </Grid>

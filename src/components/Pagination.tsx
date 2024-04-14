@@ -6,15 +6,21 @@ import {
 } from "@chakra-ui/icons";
 import { AbsoluteCenter, Box, Button, HStack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { GameQuery } from "../App";
 
 interface Props {
   currentPage: number;
   itemCount: number;
   onSelectedPage: (page: number) => void;
+  gameQuery: GameQuery;
 }
 
-const Pagination = ({ currentPage = 1, itemCount, onSelectedPage }: Props) => {
+const Pagination = ({ currentPage = 1, itemCount, onSelectedPage, gameQuery }: Props) => {
   const [pageNumber, setPageNumber] = useState(1);
+
+  useEffect(() => {
+    setPageNumber(1);
+  }, [gameQuery]);
 
   useEffect(() => {
     setPageNumber(currentPage);
